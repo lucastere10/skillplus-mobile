@@ -1,5 +1,5 @@
 import { Box, Center, HStack, Icon, Input, InputField, ScrollView, Spinner, Text, VStack, View } from "@gluestack-ui/themed";
-import { Menu} from "lucide-react-native";
+import { Menu, SlidersHorizontal} from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { fetchUsers } from "../../../../service/api/api";
@@ -37,11 +37,10 @@ export default function ProfileSearchScreen() {
                 style={{ height: '100%' }}
                 contentContainerStyle={{ flexGrow: 1 }}
             >
-                <Center my={16} gap={4}>
-                    <Text fontSize={"$3xl"}>Perfis</Text>
+                <Center backgroundColor="$primary600" pt={48} mb={32} py={16} gap={4}>
                     <HStack gap={16} p={12} alignItems="center">
                         <TouchableOpacity onPress={() => { handleSubmit() }}>
-                            <Icon color="$blue600" as={Menu} />
+                            <Icon color="$white" size="lg" as={SlidersHorizontal} />
                         </TouchableOpacity>
                         <Input
                             variant="underlined"
@@ -52,6 +51,8 @@ export default function ProfileSearchScreen() {
                             isReadOnly={false}
                         >
                             <InputField
+                                color="$white"
+                                placeholderTextColor={'$white'}
                                 value={search}
                                 onChangeText={(search) => {setSearch(search)}}
                                 onSubmitEditing={() => {handleSubmit()}}

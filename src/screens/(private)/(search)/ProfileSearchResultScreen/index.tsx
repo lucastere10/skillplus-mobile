@@ -8,10 +8,17 @@ import { ScrollView } from "@gluestack-ui/themed";
 import { TouchableOpacity } from "react-native";
 import { Github, Instagram, Linkedin, Mail, MapPin, MessageSquareText, Phone, Send } from "lucide-react-native";
 import { Avatar } from "@gluestack-ui/themed";
+import { fetchContactsByUserId } from "../../../../service/api/contacts";
+import { fetchUserSkillsByUserId } from "../../../../service/api/userSkills";
+import { ResultUserContactCard } from "../../../../components/Cards/ResultUserContactCard";
+import { ResultUserSkillCard } from "../../../../components/Cards/ResultUserSkillCard";
 
 export default function ProfileSearchResultScreen({ route }: Readonly<{ route: RouteProp<ProfileSearchRoutes, 'profileResult'> }>) {
     const { userId } = route.params;
+    const [contacts, setContacts] = useState<Contato[]>([]);
+    const [userSkills, setUserSkills] = useState<UserSkill[]>([])
     const [user, setUser] = useState<User[]>([])
+    const [activeContainer, setActiveContainer] = useState('contacts');
     const [src, setSrc] = useState(`https://robohash.org/ds${user.email}?set=set4`);
 
     useEffect(() => {
@@ -20,7 +27,6 @@ export default function ProfileSearchResultScreen({ route }: Readonly<{ route: R
                 const response = await fetchUserById(id);
                 console.log(response);
                 setUser(response.data);
-    
                 const email = response.data.email; // assuming the email is in the response data
                 await handleUserPicture(email);
             } catch (error) {
@@ -28,8 +34,10 @@ export default function ProfileSearchResultScreen({ route }: Readonly<{ route: R
             }
         }
         handleUserAndPicture(userId);
+        handleUserContacts(userId)
+        handleUserSkills(userId)
     }, []);
-    
+
 
     async function handleUserPicture(email: string) {
         try {
@@ -41,6 +49,24 @@ export default function ProfileSearchResultScreen({ route }: Readonly<{ route: R
                         console.log('Error: imageUrl is not a string');
                     }
                 });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function handleUserContacts(id: number) {
+        try {
+            const data = await fetchContactsByUserId(id);
+            setContacts(data.content)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function handleUserSkills(id: number) {
+        try {
+            const data = await fetchUserSkillsByUserId(id);
+            setUserSkills(data.content)
         } catch (error) {
             console.log(error);
         }
@@ -108,6 +134,7 @@ export default function ProfileSearchResultScreen({ route }: Readonly<{ route: R
                 <Box px={24} py={8}>
                     <Text size="md">Aqui vai um pequeno texto sobre a pessoa que eu poderia ter colocado para poder editar no backend mas o tempo estava curto</Text>
                 </Box>
+
                 <Box p={16}>
                     <HStack justifyContent="space-evenly">
                         <Center>
@@ -136,24 +163,21 @@ export default function ProfileSearchResultScreen({ route }: Readonly<{ route: R
                         </Center>
                     </HStack>
                 </Box>
-                <Box px={32} py={8} gap={12}>
-                    <HStack gap={16} alignItems="center">
-                        <Icon color="$blue500" size="xl" as={Mail} />
-                        <Text size="lg">{user.email}</Text>
-                    </HStack>
-                    <HStack gap={16} alignItems="center">
-                        <Icon color="$blue500" size="xl" as={Instagram} />
-                        <Text size="lg">@lucas.caldas50</Text>
-                    </HStack>
-                    <HStack gap={16} alignItems="center">
-                        <Icon color="$blue500" size="xl" as={Github} />
-                        <Text size="lg">github.com/lucastere10</Text>
-                    </HStack>
-                    <HStack gap={16} alignItems="center">
-                        <Icon color="$blue500" size="xl" as={Linkedin} />
-                        <Text size="lg">linkedin.com/in/lucas-caldas50/</Text>
-                    </HStack>
-                </Box>
+
+                <HStack w={"$full"} justifyContent="center" gap={16}>
+                    <Button w={'$2/5'} onPress={() => setActiveContainer('contacts')}>
+                        <Text color="$white">
+                            Contatos
+                        </Text>
+                    </Button>
+                    <Button w={'$2/5'} onPress={() => setActiveContainer('skills')}>
+                        <Text color="$white">
+                            Habilidades
+                        </Text>
+                    </Button>
+                </HStack>
+                {activeContainer === 'contacts' && <ContactsContainer contacts={contacts} />}
+                {activeContainer === 'skills' && <SkillsContainer userSkills={userSkills} />}
 
                 <Center>
                     <Button gap={16} mt={8} width='$1/2' rounded='$full'>
@@ -161,7 +185,49 @@ export default function ProfileSearchResultScreen({ route }: Readonly<{ route: R
                         <Text color="$white" fontWeight="$semibold" fontSize={"$xl"}>Seguir</Text>
                     </Button>
                 </Center>
+
             </ScrollView>
         </Box>
+    )
+}
+
+
+type ContactsContainerProps = {
+    contacts: Contato[];
+};
+const ContactsContainer = ({ contacts }: ContactsContainerProps) => {
+    if (!Array.isArray(contacts)) {
+        console.error('ContactsContainer was called with a non-array argument:', contacts);
+        return null;
+    }
+
+    return (
+        <View p={32} gap={16}>
+            {contacts.map((contact) => {
+                return (
+                    <ResultUserContactCard key={contact.contatoId} contact={contact} />
+                );
+            })}
+        </View>
+    )
+}
+
+type SkillsContainerProps = {
+    userSkills: UserSkill[];
+};
+const SkillsContainer = ({ userSkills }: SkillsContainerProps) => {
+    if (!Array.isArray(userSkills)) {
+        console.error('ContactsContainer was called with a non-array argument:', userSkills);
+        return null;
+    }
+
+    return (
+        <View p={32} gap={16}>
+            {userSkills.map((userSkill) => {
+                return (
+                    <ResultUserSkillCard key={userSkill.usuarioSkillId} userSkill={userSkill} />
+                );
+            })}
+        </View>
     )
 }

@@ -1,7 +1,9 @@
 import { config } from '@gluestack-ui/config';
-import { GluestackUIProvider, StatusBar } from '@gluestack-ui/themed';
+import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { AuthProvider } from './src/contexts/AuthContext';
 import { Routes } from './src/routes';
+import { StatusBar } from 'expo-status-bar';
+import { StateChangeProvider } from './src/contexts/stateChangeContext';
 
 
 export default function App() {
@@ -9,7 +11,9 @@ export default function App() {
     <GluestackUIProvider config={config}>
       <StatusBar />
       <AuthProvider>
-        <Routes />
+        <StateChangeProvider>
+          <Routes />
+        </StateChangeProvider>
       </AuthProvider>
     </GluestackUIProvider>
   );
