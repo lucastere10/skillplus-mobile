@@ -1,6 +1,8 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Buffer } from 'buffer';
+import { Platform } from 'react-native';
+import RNFetchBlob from 'rn-fetch-blob';
 
 const api = axios.create({
   baseURL: "http://10.0.2.2:8080/api",
@@ -96,8 +98,25 @@ export const fetchUserPictureTeste = async (email: string) => {
 }
 
 
+export const uploadPicture = async (data: any): Promise<boolean> => {
+  try {
+      const formData = new FormData();
+      formData.append('arquivo', data.arquivo);
+      formData.append('descricao', data.descricao);
 
-
+      await api.put('/usuarios/foto/upload', formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data',
+          },
+      });
+      alert('imagem alterada com sucesso!');
+      return true;
+  } catch (error: any) {
+      console.error(error.response);
+      alert(error.response.data.detail);
+      return false;
+  }
+};
 
 export const fetchUsers = async (search: string, page: number, size: number) => {
   try {

@@ -87,7 +87,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const signIn = async (data: LoginRequest) => {
         setIsLoading(true);
-        alert(WEB_CLIENT_ID)
+        //alert(WEB_CLIENT_ID)
         const loginSuccessful = await loginUser(data);
         if (loginSuccessful) {
             const userData = await fetchUserData();
@@ -103,16 +103,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             await AsyncStorage.removeItem('token');
             await AsyncStorage.removeItem('user');
             setUser({} as UsuarioLogadoType);
-            // Revoke access from Google Signin
-            await GoogleSignin.revokeAccess();
+    
+            const isUserSignedInWithGoogle = await GoogleSignin.isSignedIn();
+            if (isUserSignedInWithGoogle) {
+                await GoogleSignin.revokeAccess();
+            }
+    
             ToastAndroid.show('Sessão finalizada', ToastAndroid.TOP);
             console.log('Logout successful!');
             setIsSignedIn(false);
         } catch (err) {
+            setIsSignedIn(false)
             console.error('Logout failed!');
             console.error(err)
         }
     };
+    
 
     return (
         <AuthContext.Provider value={{ isLoading, isSignedIn, signIn, signInWithGoogle, signOut, user }}>

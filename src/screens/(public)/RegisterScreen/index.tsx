@@ -64,7 +64,7 @@ const RegisterForm = () => {
         if (register) {
             navigation.navigate('login')
         } else if (!register) {
-
+            
         }
     }
 
