@@ -60,7 +60,7 @@ const Container = () => {
 
 
   return (
-    <Box backgroundColor="$blue50">
+    <Box>
       <ScrollView
         style={{ height: '100%' }}
         contentContainerStyle={{ flexGrow: 1 }}

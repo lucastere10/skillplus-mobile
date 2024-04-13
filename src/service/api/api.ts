@@ -34,6 +34,40 @@ export const fetchUserData = async () => {
   }
 };
 
+export const fetchUser = async () => {
+  try {
+    const response = await api.get(`/auth/user`);
+    return response.data;
+  } catch (err: any) {
+    if (err.response) {
+      console.error('Error fetching data:', err.response.data);
+      return { data: null, error: err.response.data };
+    } else {
+      console.error('Error:', err.message);
+      return { data: null, error: err.message };
+    }
+  }
+}
+
+export const updateUser = async (data: any): Promise<boolean> => {
+  try {
+    let dataNascimentoDate = new Date(data.dataNascimento);
+    await api.put('/usuarios', {
+      nome: data.nome,
+      nomeSocial: data.nomeSocial,
+      dataNascimento: dataNascimentoDate,
+      telefone: data.telefone
+    })
+    alert("Usuário atualizado com sucesso!")
+    return true;
+  } catch (error: any) {
+    console.error(error);
+    alert(error.response.data.userMessage);
+    return false;
+  }
+}
+
+
 export const fetchUserById = async (id:number) => {
   try {
     const response = await api.get(`/usuarios/${id}`);

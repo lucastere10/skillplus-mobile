@@ -25,7 +25,6 @@ export function AddContactDialog() {
     });
 
     const onSubmit: SubmitHandler<ContactForm> = async (data: ContactForm) => {
-        console.log(data)
         try {
             await registerContact(data);
             setStateChanged((prevState: boolean) => !prevState);

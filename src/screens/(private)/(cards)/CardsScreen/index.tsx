@@ -17,7 +17,6 @@ export default function CardsScreen() {
         try {
             const data = await fetchUserCards();
             setCards(data.content)
-            console.log(data.content)
         } catch (error) {
             console.log(error);
         }
