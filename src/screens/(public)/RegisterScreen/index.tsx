@@ -138,42 +138,6 @@ const RegisterForm = () => {
                 )}
             </Box>
 
-
-            <Box>
-                <Controller
-                    control={control}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <Select
-                            selectedValue={value}
-                            onValueChange={(itemValue: string) => {
-                                onChange(itemValue);
-                            }}                    >
-                            <SelectTrigger variant="underlined" size="lg">
-                                <SelectInput placeholder="Selecione o tipo de conta" />
-                                <SelectIcon>
-                                    <Icon />
-                                </SelectIcon>
-                            </SelectTrigger>
-                            <SelectPortal>
-                                <SelectBackdrop />
-                                <SelectContent>
-                                    <SelectDragIndicatorWrapper>
-                                        <SelectDragIndicator />
-                                    </SelectDragIndicatorWrapper>
-                                    <SelectItem label="Administrador" value="ADMIN" />
-                                    <SelectItem label="Cliente" value="CLIENTE" />
-                                </SelectContent>
-                            </SelectPortal>
-                        </Select>
-                    )}
-                    rules={{ required: true }}
-                    name='role'
-                />
-                {errors.role && (
-                    <Text alignSelf="flex-start" ml={8} mt={1} color="red">{errors.role.message}</Text>
-                )}
-            </Box>
-
             <Button gap={8} size="lg" variant="solid" action="primary" mt={24} isDisabled={false} isFocusVisible={false} onPress={handleSubmit(onSubmit)}>
                 <ButtonText>Registrar</ButtonText>
                 <ButtonIcon as={EditIcon} />

@@ -1,5 +1,5 @@
 import { Box, Center, HStack, Icon, Input, InputField, ScrollView, Spinner, Text, VStack, View } from "@gluestack-ui/themed";
-import { Menu, SlidersHorizontal } from "lucide-react-native";
+import { SlidersHorizontal } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { fetchSkillsPublic } from "../../../../service/api/skills";

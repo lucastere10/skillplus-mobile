@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, Button, AvatarImage, Center, Divider, HStack, Icon, Text, Avatar, ScrollView, AvatarFallbackText, View, AvatarBadge } from "@gluestack-ui/themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CirclePlusIcon, MapPin, MessageSquareText, Phone, Send } from "lucide-react-native";
+import { CirclePlusIcon, MapPin, MessageSquareText, Phone, Send, Wrench } from "lucide-react-native";
 import { TouchableOpacity } from "react-native";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { fetchUserPictureTeste } from "../../../../service/api/api";
@@ -28,7 +28,7 @@ const Container = () => {
     const [src, setSrc] = useState(`https://robohash.org/ds${user.email}?set=set4`);
     const { stateChanged } = useStateChange();
     const navigation = useNavigation<ProfileNavigatorRoutesProps>();
-    
+
     useEffect(() => {
         handleUserPicture(user.email);
         handleUserContacts();
@@ -48,7 +48,7 @@ const Container = () => {
         } catch (error) {
             console.log(error);
         }
-    }   
+    }
 
     async function handleUserContacts() {
         try {
@@ -82,6 +82,11 @@ const Container = () => {
                 style={{ height: '100%' }}
                 contentContainerStyle={{ flexGrow: 1 }}
             >
+                <TouchableOpacity onPress={() => {handleRouteChangeToEditProfile()}}>
+                    <View p={6} rounded={"$full"} backgroundColor="$blue100" transform={[{ translateX: 360 }, { translateY: 65 }]} transform- position="absolute">
+                        <Icon color="$blue500" size={"lg"} as={Wrench}></Icon>
+                    </View>
+                </TouchableOpacity>
                 <View backgroundColor={'$primary600'} h={48}></View>
                 <Center my={16} gap={4}>
                     <Text fontSize={"$3xl"}>{user.nome}</Text>
@@ -98,7 +103,7 @@ const Container = () => {
                             <Icon color="$white" size="xl" as={MessageSquareText} />
                         </Box>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {handleRouteChangeToUploadPicture()}}>
+                    <TouchableOpacity onPress={() => { handleRouteChangeToUploadPicture() }}>
                         <Avatar
                             size="2xl"
                             borderColor="$primary600"

@@ -43,7 +43,6 @@ export function AddSkillDialog() {
     }
 
     const onSubmit: SubmitHandler<UserSkillForm> = async (data: UserSkillForm) => {
-        console.log(data)
         try {
             await registerUserSkill(data);
             setStateChanged((prevState: boolean) => !prevState);

@@ -17,7 +17,6 @@ export default function SkillSearchResultScreen({ route }: Readonly<{ route: Rou
 
         try {
             const response = await fetchSkillById(id)
-            console.log(response)
             setSkill(response)
         } catch (error) {
             console.log(error);
