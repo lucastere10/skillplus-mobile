@@ -128,10 +128,10 @@ export function AddSkillDialog() {
                                                 <SelectDragIndicatorWrapper>
                                                     <SelectDragIndicator />
                                                 </SelectDragIndicatorWrapper>
-                                                <SelectItem value="INICIANTE" label="Iniciante" />
-                                                <SelectItem value="INTERMEDIARIO" label="Intermediário" />
+                                                <SelectItem value="BASICO" label="Básico" />
+                                                <SelectItem value="I1.NTERMEDIARIO" label="Intermediário" />
                                                 <SelectItem value="AVANCADO" label="Avançado" />
-                                                <SelectItem value="ESPECIALISTA" label="Especialista" />
+                                                <SelectItem value="FLUENTE" label="Especialista" />
                                             </SelectContent>
                                         </SelectPortal>
                                     </Select>
