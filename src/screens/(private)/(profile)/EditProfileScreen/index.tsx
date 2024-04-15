@@ -6,8 +6,8 @@ import { fetchUser, updateUser } from "../../../../service/api/api";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateUserSchema } from "../../../../schemas/authSchema";
 import { EditIcon } from "lucide-react-native";
-import DateTimePicker from "@react-native-community/datetimepicker"
 import { TouchableOpacity } from "react-native";
+import { ProfileNavigatorRoutesProps } from "../../../../routes/profile.routes";
 
 export default function EditProfileScreen() {
 
@@ -36,7 +36,7 @@ export default function EditProfileScreen() {
 
 const EditForm = () => {
     const [user, setUser] = useState<User | null>(null)
-    const navigation = useNavigation()
+    const navigation = useNavigation<ProfileNavigatorRoutesProps>()
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
 
@@ -79,6 +79,7 @@ const EditForm = () => {
         console.log(newDate)
         try {
             await updateUser(data);
+            navigation.navigate("profile")
         } catch (error: any) {
             console.error(error);
             alert(error.response.data.userMessage);
@@ -184,15 +185,6 @@ const EditForm = () => {
                                 />
                             )}
                         />
-                        {/* {show && (
-                            <DateTimePicker
-                                testID="dateTimePicker"
-                                value={date}
-                                mode={'date'}
-                                display="default"
-                                onChange={onChange}
-                            />
-                        )} */}
                     </Input>
                 </TouchableOpacity>
                 {errors.dataNascimento && (

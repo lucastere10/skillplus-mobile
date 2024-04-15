@@ -21,14 +21,11 @@ export const registerSchema = yup.object().shape({
     senha: yup
         .string()
         .required('Digite a senha'),
-    role: yup
+    confirmarSenha: yup
         .string()
-        .required('Escolha um tipo de usuário válido'),
-    // confirmarSenha: yup
-    //     .string()
-    //     .required('Digite a senha novamente'),
+        .oneOf([yup.ref('senha')], "Senhas não coincidem")
+        .required('Digite a senha novamente'),
 });
-
 
 export const contactSchema = yup.object().shape({
     contatoNome: yup
@@ -91,12 +88,17 @@ export const userSkillSchema = yup.object().shape({
 });
 
 const PHONE_NO_REGEX = /^\(\d{2}\) \d{5}-\d{4}$/;
+const DATE_FORMAT = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 export const updateUserSchema = yup.object().shape({
     nome: yup.string().required('Nome é obrigatório'),
     nomeSocial: yup.string(),
     telefone: yup.string().notRequired().matches(PHONE_NO_REGEX, 'Favor seguir o formato "(11) 99999-9999"'),
-    dataNascimento: yup.string().required('Data de Nascimento é obrigatória'),
+    dataNascimento: yup
+        .string()
+        .required('Data de Nascimento é obrigatória')
+        .matches(DATE_FORMAT, 'Data de Nascimento deve estar no formato DD/MM/YYYY'),
 });
+
 
 const SUPPORTED_FORMATS: { [key: string]: string[] } = { image: ['jpg', 'png', 'jpeg'] };
 const MAX_FILE_SIZE = 1048576; //3mb

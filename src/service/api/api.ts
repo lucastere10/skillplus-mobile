@@ -1,8 +1,7 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Buffer } from 'buffer';
-import { Platform } from 'react-native';
-import RNFetchBlob from 'rn-fetch-blob';
+import { format, parse } from 'date-fns';
 
 const api = axios.create({
   baseURL: "http://10.0.2.2:8080/api",
@@ -51,11 +50,12 @@ export const fetchUser = async () => {
 
 export const updateUser = async (data: any): Promise<boolean> => {
   try {
-    let dataNascimentoDate = new Date(data.dataNascimento);
+    const parsedDate = parse(data.dataNascimento, 'dd/MM/yyyy', new Date());
+    const formattedDate = format(parsedDate, 'yyyy-MM-dd');
     await api.put('/usuarios', {
       nome: data.nome,
       nomeSocial: data.nomeSocial,
-      dataNascimento: dataNascimentoDate,
+      dataNascimento: formattedDate,
       telefone: data.telefone
     })
     alert("Usuário atualizado com sucesso!")
@@ -68,7 +68,7 @@ export const updateUser = async (data: any): Promise<boolean> => {
 }
 
 
-export const fetchUserById = async (id:number) => {
+export const fetchUserById = async (id: number) => {
   try {
     const response = await api.get(`/usuarios/${id}`);
     return { data: response.data, error: null };
@@ -134,21 +134,21 @@ export const fetchUserPictureTeste = async (email: string) => {
 
 export const uploadPicture = async (data: any): Promise<boolean> => {
   try {
-      const formData = new FormData();
-      formData.append('arquivo', data.arquivo);
-      formData.append('descricao', data.descricao);
+    const formData = new FormData();
+    formData.append('arquivo', data.arquivo);
+    formData.append('descricao', data.descricao);
 
-      await api.put('/usuarios/foto/upload', formData, {
-          headers: {
-              'Content-Type': 'multipart/form-data',
-          },
-      });
-      alert('imagem alterada com sucesso!');
-      return true;
+    await api.put('/usuarios/foto/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    alert('imagem alterada com sucesso!');
+    return true;
   } catch (error: any) {
-      console.error(error.response);
-      alert(error.response.data.detail);
-      return false;
+    console.error(error.response);
+    alert(error.response.data.detail);
+    return false;
   }
 };
 

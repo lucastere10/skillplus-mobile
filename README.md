@@ -1,24 +1,80 @@
-This is a [Next.js](https://github.com/expo/expo) + [Gluestack-ui](https://ui.gluestack.io/) project template bootstrapped with [`create-expo-app`](https://docs.expo.dev/get-started/create-a-project/).
+# SKILL+
 
-## Getting Started
+## Descrição
 
-First, run the development server:
+Este projeto é uma aplicação mobile em React Native. É uma extensão da aplicação SKILL+ para compartilhamento de contatos e habilidades.
+
+## Recursos
+
+- Leitor de QR Code.
+- Sistema de upload de foto e atualização de perfil.
+- Possibilidade de adicionar habilidades ao perfil e torná-las privadas ou públicas.
+- Possibilidade de adicionar contatos no perfil e torná-los privados ou públicos.
+- Sistema de pesquisa de usuários, com as informações que o mesmo optou por deixar público.
+- Sistema de cartões, podendo adicionar novos cartões com QR Code, ativar ou desativar, mudar informações e até imagem de background.
+- Sistema de rotas pelo ReactNavigation utilizando StackNavigation e BottomTabNavigation
+
+## Autenticação
+
+Autenticação e autorização através do React Native utilzando AsyncStorage. Possui login social utilizando Google.
+
+## Tecnologias Utilizadas
+
+- React Native
+- GlueStack para criação de componentes.
+- Axios para API.
+- React Hook Form para formulários.
+- Yup para validação.
+- ReactNavigation para rotas
+
+## Em Desenvolvimento
+
+- Sistema de filtros mais robusto.
+- Sistema de mensagens em tempo real usando WebSockets.
+- Sistema de envio de email.
+
+## Telas
+
+<img src="./public/images/home.png">
+<br>
+<img src="./public/images/profile.png">
+<br>
+<img src="./public/images/totp.png">
+<br>
+<img src="./public/images/search-profiles.png">
+<br>
+<img src="./public/images/search-skills.png">
+<br>
+<img src="./public/images/cards.png">
+<br>
+<img src="./public/images/add-picture.png">
+<br>
+<img src="./public/images/login.png">
+<br>
+
+## Como Instalar
+
+Primeiro, faça a instalação dos pacotes através do gerenciador de sua preferência
 
 ```bash
-# For web
-yarn web
-# For ios
-yarn ios
-# For android
-yarn android
+# pnpm
+pnpm install
 ```
 
-You can start editing the page by modifying `App.tsx`. The page auto-updates as you edit the file.
+depoins, monte rode a aplicação
 
-This project uses [`@gluestack-ui`](https://ui.gluestack.io/docs/overview/introduction) library that provides optionally styled and accessible components. These components are designed for easy integration into applications developed with React and React Native.
+```bash
+# pnpm
+npx expo run:android
+```
 
+## Licença
+
+-----
 
 ## Learn More
+
+This is a [Next.js](https://github.com/expo/expo) + [Gluestack-ui](https://ui.gluestack.io/) project template bootstrapped with [`create-expo-app`](https://docs.expo.dev/get-started/create-a-project/).
 
 To learn more about Expo + Gluestack UI template, take a look at the following resources:
 

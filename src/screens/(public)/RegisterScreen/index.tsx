@@ -4,6 +4,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerUser } from "../../../service/api/auth";
 import { registerSchema } from "../../../schemas/authSchema";
+import { useState } from "react";
 
 export default function RegisterScreen() {
     return (
@@ -48,7 +49,8 @@ const Container = () => {
 };
 
 const RegisterForm = () => {
-
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [password, setPassword] = useState("");
     const navigation = useNavigation()
 
     const {
@@ -60,17 +62,19 @@ const RegisterForm = () => {
     });
 
     const onSubmit: SubmitHandler<RegisterRequest> = async (data) => {
-        const register = await registerUser(data)
-        if (register) {
-            navigation.navigate('login')
-        } else if (!register) {
-            
+        if (password !== confirmPassword) {
+            alert("Senhas não coincidem!");
+        } else {
+            const register = await registerUser(data)
+            if (register) {
+                navigation.navigate('login')
+            }
         }
     }
 
     return (
         <Box
-        gap={12}
+            gap={12}
         >
             <Box>
                 <Input variant="underlined" size="lg" isDisabled={false} isInvalid={false} isReadOnly={false} >
@@ -135,6 +139,28 @@ const RegisterForm = () => {
                 </Input>
                 {errors.senha && (
                     <Text alignSelf="flex-start" ml={8} mt={1} color="red">{errors.senha.message}</Text>
+                )}
+            </Box>
+
+            <Box>
+                <Input variant="underlined" size="lg" isDisabled={false} isInvalid={false} isReadOnly={false} >
+                    <Controller
+                        control={control}
+                        rules={{ required: true }}
+                        name='confirmarSenha'
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <InputField
+                                type="password"
+                                onBlur={onBlur}
+                                onChangeText={onChange}
+                                value={value}
+                                placeholder='Confirme sua senha'
+                            />
+                        )}
+                    />
+                </Input>
+                {errors.confirmarSenha && (
+                    <Text alignSelf="flex-start" ml={8} mt={1} color="red">{errors.confirmarSenha.message}</Text>
                 )}
             </Box>
 

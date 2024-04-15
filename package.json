@@ -25,6 +25,7 @@
     "axios": "^1.6.8",
     "babel-plugin-module-resolver": "^5.0.0",
     "crypto-js": "^4.2.0",
+    "date-fns": "^3.6.0",
     "expo": "^50.0.3",
     "expo-status-bar": "~1.11.1",
     "lucide-react-native": "^0.367.0",

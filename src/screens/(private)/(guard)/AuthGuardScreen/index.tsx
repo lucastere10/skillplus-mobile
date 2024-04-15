@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { fetchTotp } from "../../../../service/api/auth";
+import { TotpNavigatorRoutesProps } from "../../../../routes/totp.routes";
 
 export default function AuthGuardScreen() {
   return <Container />;
@@ -13,7 +14,7 @@ const Container = () => {
   const { hasPermission, requestPermission } = useCameraPermission();
   const [otpValue, setOtpValue] = useState('')
   const device = useCameraDevice('back');
-  const navigation = useNavigation()
+  const navigation = useNavigation<TotpNavigatorRoutesProps>()
 
   const codeScanner = useCodeScanner({
     codeTypes: ['qr', 'ean-13'],

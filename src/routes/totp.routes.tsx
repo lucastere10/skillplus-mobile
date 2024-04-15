@@ -5,7 +5,7 @@ import TotpScreen from "../screens/(private)/(guard)/TotpScreen";
 
 type TotpRoutes = {
     qrreader: undefined;
-    totp: undefined;
+    totp: { skillId: string };
 
 }
 

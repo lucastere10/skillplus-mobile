@@ -11,7 +11,7 @@ interface RegisterRequest {
     nome: string;
     login: string;
     senha: string;
-    role: string;
+    confirmarSenha: string;
 }
 
 

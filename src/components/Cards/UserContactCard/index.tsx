@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import {
     HStack, VStack, Divider, Text, Icon, ButtonGroup, Button, ButtonText, View, LinkText,
-    AlertDialog, AlertDialogBackdrop, AlertDialogContent, AlertDialogHeader, AlertDialogCloseButton, CloseIcon, AlertDialogBody, AlertDialogFooter
+    AlertDialog, AlertDialogBackdrop, AlertDialogContent, AlertDialogHeader, AlertDialogCloseButton, CloseIcon, AlertDialogBody, AlertDialogFooter, Heading, Link
 } from "@gluestack-ui/themed";
-import { Github, Instagram, Linkedin, Mail, Rss, Globe, Facebook, Trash2 } from "lucide-react-native";
+import { Github, Instagram, Linkedin, Mail, Rss, Globe, Facebook, Trash2, LucideIcon } from "lucide-react-native";
 import { Switch, TouchableOpacity } from "react-native";
 import { useStateChange } from "../../../contexts/stateChangeContext";
 import { activateContact, deleteContact } from "../../../service/api/contacts";
-import { Heading } from "@gluestack-ui/themed";
-import { Link } from "@gluestack-ui/themed";
 
-const IconMap = {
+const IconMap: { [key: string]: LucideIcon } = {
     INSTAGRAM: Instagram,
     EMAIL: Mail,
     GITHUB: Github,

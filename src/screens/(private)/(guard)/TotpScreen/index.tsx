@@ -22,7 +22,7 @@ export default function TotpScreen({ route }: { route: any }) {
 
     return (
         <Box flex={1} h={"$full"} alignItems="center" justifyContent="center" backgroundColor="$white" pt={12} gap={16}>
-            <Text px={36} py={16} textAlign="center" fontWeight="$semibold" fontSize='$lg'>Você leu um QR Code para iniciar a sessão no SpringTech</Text>
+            <Text px={36} py={16} textAlign="center" fontWeight="$semibold" fontSize='$lg'>Você leu um QR Code para iniciar a sessão no SkillPlus</Text>
             <Text fontSize='$5xl' fontWeight="bold" >{otp}</Text>
             <Text>Deseja fazer login como:</Text>
             <Text fontWeight="$semibold" fontSize='$2xl'>{user.email}</Text>

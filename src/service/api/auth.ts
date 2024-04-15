@@ -8,7 +8,6 @@ export const registerUser = async (data: RegisterRequest) => {
             nome: data.nome,
             login: data.login,
             senha: data.senha,
-            role: data.role,
         });
         Alert.alert('Usuário registrado com sucesso!');
         return true;

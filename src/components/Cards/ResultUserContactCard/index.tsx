@@ -1,9 +1,9 @@
 import React from "react";
 import {
     HStack, Link, Icon, LinkText} from "@gluestack-ui/themed";
-import { Github, Instagram, Linkedin, Mail, Rss, Globe, Facebook } from "lucide-react-native";
+import { Github, Instagram, Linkedin, Mail, Rss, Globe, Facebook, LucideIcon } from "lucide-react-native";
 
-const IconMap = {
+const IconMap: { [key: string]: LucideIcon } = {
     INSTAGRAM: Instagram,
     EMAIL: Mail,
     GITHUB: Github,

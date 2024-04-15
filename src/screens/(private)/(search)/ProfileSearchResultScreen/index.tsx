@@ -27,7 +27,7 @@ export default function ProfileSearchResultScreen({ route }: Readonly<{ route: R
                 const response = await fetchUserById(id);
                 console.log(response);
                 setUser(response.data);
-                const email = response.data.email; // assuming the email is in the response data
+                const email = response.data.email;
                 await handleUserPicture(email);
             } catch (error) {
                 console.log(error);
