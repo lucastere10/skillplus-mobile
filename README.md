@@ -35,22 +35,16 @@ Autenticação e autorização através do React Native utilzando AsyncStorage. 
 
 ## Telas
 
-<img src="./public/images/home.png">
-<br>
-<img src="./public/images/profile.png">
-<br>
-<img src="./public/images/totp.png">
-<br>
-<img src="./public/images/search-profiles.png">
-<br>
-<img src="./public/images/search-skills.png">
-<br>
-<img src="./public/images/cards.png">
-<br>
-<img src="./public/images/add-picture.png">
-<br>
-<img src="./public/images/login.png">
-<br>
+<p float="left">
+  <img src="./public/images/home.png" width="25%">
+  <img src="./public/images/profile.png" width="25%">
+  <img src="./public/images/totp.png" width="25%">
+  <img src="./public/images/search-profiles.png" width="25%">
+  <img src="./public/images/search-skills.png" width="25%">
+  <img src="./public/images/cards.png" width="25%">
+  <img src="./public/images/add-picture.png" width="25%">
+  <img src="./public/images/login.png" width="25%">
+</p>
 
 ## Como Instalar
 
